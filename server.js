@@ -19,6 +19,8 @@ app.use(express.static(__dirname + '/public'));
 // routes for our api
 app.use('/api', routes);
 
+
+// fallback for other router 
 app.get('*', function(req, res) {
 	res.sendFile(path.join(__dirname + '/public/index.html'));
 });

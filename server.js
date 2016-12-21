@@ -6,8 +6,8 @@ const express = require('express'),
       routes = require('./routes/router.js');
 
 // use body parser so we can grab information from POST requests
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true, limit: '10mb' }));
+app.use(bodyParser.json({ limit: '10mb' }));
 
 // log all requests to the console 
 app.use(morgan('dev'));

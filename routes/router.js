@@ -15,7 +15,9 @@ router.post('/save-picture', function(req, res) {
         base64Data = img.replace(/^data:image\/\w+;base64,/, ""),
         buf = new Buffer(base64Data, 'base64');
     
-    fs.writeFile(imgName, buf)
+    fs.writeFile(config.uploadFolder + imgName, buf, function(err, data){
+        console.log(path.join(__dirname, '..', config.uploadFolder))
+    })
 
     // save it to db ---- revrite to save links not the whole file
     MongoClient.connect('mongodb://localhost:27017/' + config.database, function(err, db) {
@@ -30,8 +32,6 @@ router.post('/save-picture', function(req, res) {
         }
     })
 });
-
-
 
 router.get('/', (req, res) => {
     res.send(config.database)

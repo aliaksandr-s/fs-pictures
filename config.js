@@ -1,4 +1,4 @@
 module.exports = {
     "database": "picture-app",
-    "uploadFolder": "uploads/" 
+    "uploadFolder": "public/assets/" 
 }

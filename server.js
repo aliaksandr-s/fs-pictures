@@ -10,7 +10,7 @@ app.use(bodyParser.urlencoded({ extended: true, limit: '10mb' }));
 app.use(bodyParser.json({ limit: '10mb' }));
 
 // log all requests to the console 
-app.use(morgan('dev'));
+//app.use(morgan('dev'));
 
 // set static files location
 // used for requests that our frontend will make

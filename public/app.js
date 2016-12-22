@@ -1,6 +1,8 @@
 var app = angular.module('myApp', []);
 
 app.controller('startController', ['$scope', '$http', '$window', function($scope, $http, $window) {
+    $scope.pictures = [];
+
     $scope.upload = function() {
         var f = document.getElementById('my-file-selector').files[0],
             r = new FileReader();
@@ -23,4 +25,10 @@ app.controller('startController', ['$scope', '$http', '$window', function($scope
 
         r.readAsDataURL(f); // encode to base64
     }
+
+    $http.get('/api/get-pictures')
+        .success(data => {
+            $scope.pictures = data
+        })
+        .error(err => console.log(err))
 }]);

@@ -16,24 +16,40 @@ router.post('/save-picture', function (req, res) {
         buf = new Buffer(base64Data, 'base64');
 
     fs.writeFile(config.uploadFolder + imgName, buf, function (err, data) {
-        console.log(path.join(config.uploadFolder + imgName))
+        //console.log(path.join(config.uploadFolder + imgName))
 
-        // save it to db ---- revrite to save links not the whole file
-        MongoClient.connect('mongodb://localhost:27017/' + config.database, function (err, db) {
-            if (!err) {
-                db.collection('pictures').insert({name: imgName}, function (err, result) {
-                    if (result) {
-                        res.send(result);
-                    }
-                    console.log('saved')
-                });
-                db.close();
-            }
-        })
+        // save img name to db --------- rewrite to get rid of duplicates
+
+        // MongoClient.connect('mongodb://localhost:27017/' + config.database, function (err, db) {
+        //     if (!err) {
+        //         db.collection('pictures').insert({name: imgName}, function (err, result) {
+        //             if (result) {
+        //                 res.send(result);
+        //             }
+        //             console.log('saved')
+        //         });
+        //         db.close();
+        //     }
+        // })
+
+        res.send('done')
 
     })
 
 });
+
+router.get('/get-pictures', function (req, res) {
+    var images = [];
+
+    fs.readdir(config.uploadFolder, (err, files) => {
+        files.forEach(file => {
+            images.push(file)
+        });
+        res.send(images)
+    })
+
+    
+})
 
 router.get('/', (req, res) => {
     res.send(config.database)

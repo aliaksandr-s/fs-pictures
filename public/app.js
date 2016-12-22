@@ -7,12 +7,11 @@ app.controller('startController', ['$scope', '$http', '$window', function($scope
 
         r.onloadend = function(e) {
             var data = {
-                "img": e.target.result
+                "img": e.target.result,
+                "name": f.name
             };
-            // console.log(data);
 
-
-            // send encoded data to server
+            //send encoded data to the server
             $http.post('/api/save-picture', data)
                 .success(function(res){
                     $window.location.reload();
